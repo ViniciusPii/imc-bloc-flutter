@@ -1,14 +1,8 @@
+import 'dart:io' show Platform;
 import 'package:flutter/material.dart';
-import 'package:imc_bloc/src/ui/android/material_app.dart';
-import 'package:imc_bloc/src/ui/ios/cupertino_app.dart';
+import 'src/material_app.dart';
+import 'package:imc_bloc/src/cupertino_app.dart';
 
 void main() {
-  runApp(MyMaterialApp());
+  Platform.isIOS ? runApp(MyCupertinoApp()) : runApp(MyMaterialApp());
 }
-
-// void main() {
-//   runApp(MyCupertinoApp());
-// }
-
-
-
