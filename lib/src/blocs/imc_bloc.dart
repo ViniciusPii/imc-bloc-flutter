@@ -1,5 +1,4 @@
-import 'dart:ffi';
-
+import 'package:flutter/cupertino.dart';
 import 'package:flutter_masked_text/flutter_masked_text.dart';
 
 class ImcBloc {
@@ -7,7 +6,7 @@ class ImcBloc {
   var weightCtrl = new MaskedTextController(mask: '000');
   var result = 'Preencha todos os campos para calcular seu IMC';
 
-  calculate() {
+  calculate(context) {
     double weight = double.parse(weightCtrl.text);
     double height = double.parse(heightCtrl.text) / 100;
 
@@ -26,5 +25,6 @@ class ImcBloc {
     } else if (imc >= 40) {
       result = 'Obesidade Grau III (${imc.toStringAsPrecision(2)})';
     }
+    FocusScope.of(context).unfocus();
   }
 }

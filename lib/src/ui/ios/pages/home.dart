@@ -1,6 +1,14 @@
 import 'package:flutter/cupertino.dart';
+import 'package:imc_bloc/src/blocs/imc_bloc.dart';
 
-class Home extends StatelessWidget {
+class Home extends StatefulWidget {
+  @override
+  _HomeState createState() => _HomeState();
+}
+
+class _HomeState extends State<Home> {
+  var bloc = new ImcBloc();
+
   @override
   Widget build(BuildContext context) {
     return CupertinoPageScaffold(
@@ -13,12 +21,14 @@ class Home extends StatelessWidget {
             padding: const EdgeInsets.all(24),
             child: CupertinoTextField(
               placeholder: 'Altura (cm)',
+              controller: bloc.heightCtrl,
               keyboardType: TextInputType.number,
             ),
           ),
           Padding(
             padding: const EdgeInsets.all(24),
             child: CupertinoTextField(
+              controller: bloc.weightCtrl,
               placeholder: 'Peso (kg)',
               keyboardType: TextInputType.number,
             ),
@@ -26,7 +36,7 @@ class Home extends StatelessWidget {
           Padding(
             padding: const EdgeInsets.all(16),
             child: Text(
-              'Você está fora de forma',
+              bloc.result,
               textAlign: TextAlign.center,
             ),
           ),
@@ -35,7 +45,11 @@ class Home extends StatelessWidget {
             child: Container(
               height: 45,
               child: CupertinoButton.filled(
-                onPressed: () {},
+                onPressed: () {
+                  setState(() {
+                    bloc.calculate(context);
+                  });
+                },
                 child: Text(
                   'Calcular',
                 ),

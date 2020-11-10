@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:imc_bloc/src/blocs/imc_bloc.dart';
 
 class Home extends StatefulWidget {
   @override
@@ -6,6 +7,8 @@ class Home extends StatefulWidget {
 }
 
 class _HomeState extends State<Home> {
+  var bloc = new ImcBloc();
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -17,6 +20,7 @@ class _HomeState extends State<Home> {
           Padding(
             padding: const EdgeInsets.all(24),
             child: TextFormField(
+              controller: bloc.heightCtrl,
               decoration: InputDecoration(
                 labelText: 'Altura em (cm)',
               ),
@@ -26,6 +30,7 @@ class _HomeState extends State<Home> {
           Padding(
             padding: const EdgeInsets.all(24),
             child: TextFormField(
+              controller: bloc.weightCtrl,
               decoration: InputDecoration(
                 labelText: 'Peso em (cm)',
               ),
@@ -35,7 +40,7 @@ class _HomeState extends State<Home> {
           Padding(
             padding: const EdgeInsets.all(16),
             child: Text(
-              'Você está fora de forma',
+              bloc.result,
               textAlign: TextAlign.center,
             ),
           ),
@@ -45,7 +50,11 @@ class _HomeState extends State<Home> {
               height: 45,
               child: FlatButton(
                 color: Theme.of(context).primaryColor,
-                onPressed: () {},
+                onPressed: () {
+                  setState(() {
+                    bloc.calculate(context);
+                  });
+                },
                 child: Text(
                   'Calcular',
                   style: TextStyle(
