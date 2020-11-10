@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:imc_bloc/src/pages/android/home.dart';
+
+import 'ui/android/pages/home.dart';
 
 class MyApp extends StatelessWidget {
   @override
